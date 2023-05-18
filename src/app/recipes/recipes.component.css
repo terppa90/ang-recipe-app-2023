@@ -1,0 +1,46 @@
+a {
+  text-decoration: none;
+  color: black;
+  cursor: default;
+  width: 50%;
+}
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+h3 {
+  text-align: left;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  font-family: "Castoro Titling", cursive;
+}
+.container {
+  display: block;
+  float: left;
+  margin: 0 0 0.5rem 0;
+}
+.card {
+  float: inline-start;
+}
+.card-body {
+  position: relative;
+}
+.card:hover {
+  /* border-color: black; */
+  color: gray;
+  font-weight: bold;
+  cursor: pointer;
+}
+button {
+  align-self: center;
+  width: 20%;
+  /* padding: 0.25rem; */
+  display: block;
+  position: relative;
+  float: right;
+  /* background-color: gray; */
+}
+
+button > .close {
+}
