@@ -34,13 +34,24 @@ h3 {
 }
 button {
   align-self: center;
-  width: 20%;
-  /* padding: 0.25rem; */
+  margin-right: 0.25rem;
+  padding: 2px;
   display: block;
   position: relative;
   float: right;
-  /* background-color: gray; */
 }
-
-button > .close {
+button.btn.btn-outline-secondary {
+  padding: 5px;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+}
+.material-symbols-outlined {
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+  /* align-content: center;
+  align-items: center;
+  align-self: center; */
 }

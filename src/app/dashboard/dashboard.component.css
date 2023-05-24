@@ -19,13 +19,13 @@ h3 {
   float: left;
   margin: 0 0 0.5rem 0;
 }
-.card:hover {
-  /* border-color: black; */
-  color: gray;
-  font-weight: bold;
-  cursor: pointer;
+.card-img-top {
+  opacity: 90%;
+  /* transform: scale(); */
 }
-
-.card-body:hover {
+.card-title {
+  /* font-family: "Castoro Titling", cursive; */
 }
-/* */
+.card-text {
+  /* font-family: Arial, sans-serif; */
+}

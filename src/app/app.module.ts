@@ -4,6 +4,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { AuthGuard } from './auth.guard';
+
 import { AppComponent } from './app.component';
 import { AddrecipeComponent } from './addrecipe/addrecipe.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -13,6 +15,7 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SuppliesFormComponent } from './addrecipe/supplies-form/supplies-form.component';
+import { EditrecipeComponent } from './editrecipe/editrecipe.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,7 @@ import { SuppliesFormComponent } from './addrecipe/supplies-form/supplies-form.c
     LoginComponent,
     RegisterComponent,
     SuppliesFormComponent,
+    EditrecipeComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,7 @@ import { SuppliesFormComponent } from './addrecipe/supplies-form/supplies-form.c
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

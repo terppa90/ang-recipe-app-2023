@@ -25,6 +25,11 @@ export class RecipesComponent implements OnInit {
   delete(recipe: Recipe): void {
     this.recipes = this.recipes.filter((h) => h !== recipe);
     this.rs.delRecipe(String(recipe.id)).subscribe();
-    this.router.navigate(['/recipes']);
+    this.router.navigate(['/dashboard']);
+  }
+
+  // Muokkaa resepti'
+  editRecipe() {
+    this.router.navigate(['/edit']);
   }
 }
