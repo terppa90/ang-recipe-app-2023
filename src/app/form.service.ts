@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormService {
-  _url = 'https://localhost:3000/recipes';
+  _url = 'http://localhost:3000/recipes';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -16,8 +17,10 @@ export class FormService {
 
   constructor(private http: HttpClient) {}
   // Reseptin lisäys serverille lomakkeelta
-  FormAddRecipe(userData) {
-    const mytoken = JSON.parse(sessionStorage['token']);
+  FormAddRecipe(userData): Observable<any> {
+    const mytoken = JSON.parse(sessionStorage.getItem('token'));
+    console.log(mytoken);
+
     userData.token = mytoken.token;
     return this.http.post<any>(this._url, userData, this.httpOptions);
   }

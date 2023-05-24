@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Recipe } from '../models/recipe';
-import { RecipeService } from '../services/recipe.service';
 import { FormService } from '../form.service';
 
 import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
-  UntypedFormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormArray,
   Validators,
 } from '@angular/forms';
-import { SuppliesFormComponent } from './supplies-form/supplies-form.component';
+// import { SuppliesFormComponent } from './supplies-form/supplies-form.component';
 
 @Component({
   selector: 'app-addrecipe',
@@ -19,14 +17,15 @@ import { SuppliesFormComponent } from './supplies-form/supplies-form.component';
   styleUrls: ['./addrecipe.component.css'],
 })
 export class AddrecipeComponent implements OnInit {
-  public myForm!: UntypedFormGroup;
+  public myForm!: FormGroup;
+  arrayIndex: number;
 
-  get suppliesArray(): UntypedFormArray {
-    return this.myForm?.get('supplies') as UntypedFormArray;
+  get suppliesArray(): FormArray {
+    return this.myForm?.get('supplies') as FormArray;
   }
 
   constructor(
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private formService: FormService,
     private route: ActivatedRoute,
     private router: Router
@@ -35,13 +34,17 @@ export class AddrecipeComponent implements OnInit {
   // Käytetään get:iä että saadaan templaattiin selkeempää koodia
 
   get supplies() {
-    return this.myForm.get('supplies') as UntypedFormArray;
+    return this.myForm.get('supplies') as FormArray;
   }
 
-  addSupplies(): UntypedFormGroup {
-    return new UntypedFormGroup({
-      name: new UntypedFormControl(),
-      quantity: new UntypedFormControl(),
+  get f() {
+    return this.myForm.controls;
+  }
+
+  addSupplies(): FormGroup {
+    return new FormGroup({
+      name: new FormControl(),
+      quantity: new FormControl(),
     });
   }
 
@@ -51,36 +54,45 @@ export class AddrecipeComponent implements OnInit {
   }
 
   public generateMyForm(): void {
-    this.myForm = new UntypedFormGroup({
-      id: new UntypedFormControl(''),
-      name: new UntypedFormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-      ]),
-      author: new UntypedFormControl('', Validators.required),
-      supplies: new UntypedFormArray([]),
-      recipe: new UntypedFormControl('', [
-        Validators.required,
-        Validators.minLength(20),
-      ]),
+    this.myForm = new FormGroup({
+      id: new FormControl(''),
+      name: new FormControl(''),
+      author: new FormControl(''),
+      supplies: new FormArray([]),
+      recipe: new FormControl(''),
     });
   }
 
   // Lisätään uusi ainesosa/raaka-aine
-  public addRecipeSupplyItem(): void {
-    this.suppliesArray.push(SuppliesFormComponent.addRecipeSupplyItem());
+  addRecipeSupplyItem(): void {
+    this.suppliesArray.push(this.addRecipeSupplyItems());
   }
   // Poistetaan ainesosa/raaka-aine
-  public deleteSupply(index: number): void {
+  deleteSupply(index: number): void {
     this.suppliesArray.removeAt(index);
   }
 
-  public submitRecipeForm(): void {}
+  addRecipeSupplyItems(): FormGroup {
+    return new FormGroup({
+      name: new FormControl(''),
+      quantity: new FormControl(''),
+    });
+  }
+
+  public submitRecipeForm(): void {
+    console.log(this.myForm.value);
+    this.addRecipeSupplyItems();
+    this.formService.FormAddRecipe(this.myForm.value).subscribe({
+      next: (response) => console.log('success', response),
+      error: (e) => console.log('Error', e),
+    });
+    this.router.navigate(['/recipes']);
+  }
 
   // Lomakkeen lähetysmetodi
   // public submitRecipeForm(): void {
   //   console.log(this.myForm.value);
-  //   SuppliesFormComponent.addRecipeSupplyItem();
+  //   this.addRecipeSupplyItem();
   //   this.formService.FormAddRecipe(this.myForm.value).subscribe(
   //     (response) => {
   //       console.log('success', response), this.router.navigate(['/recipes']);

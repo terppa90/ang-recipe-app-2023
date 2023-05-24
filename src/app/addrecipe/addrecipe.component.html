@@ -6,19 +6,11 @@
     <div class="form-group col-sm-4">
       <label for="recipeID">Reseptin ID</label>
       <input
-        [class.is-invalid]="
-          myForm.get('id')?.invalid && myForm.get('id')?.touched
-        "
         formControlName="id"
         type="text"
         class="form-control"
         id="recipeID"
       />
-      <small
-        [class.d-none]="myForm.get('id')?.valid || myForm.get('id')?.untouched"
-        class="text-danger"
-        >ID vaaditaan</small
-      >
     </div>
 
     <div class="form-group col-sm-4">
@@ -61,31 +53,54 @@
       >
     </div>
 
-    <!--Ainesosat tulee supplies-form -komponentin kautta ( <app-supplies-form> )-->
-    <div class="form-group col-sm-4">
-      <div class="form-group col-sm-4">
-        <label>Ainesosat:</label>
+    <!--Ainesosat -->
+    <form [formGroup]="myForm" (ngSubmit)="addRecipeSupplyItem()">
+      <div formArrayName="supplies">
+        <div class="form-group col-sm-4">
+          <label>Ainesosat:</label>
+        </div>
+
+        <div
+          class="form-group"
+          *ngFor="let _ of suppliesArray.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <div class="form-group">
+            <label>Ainesosan nimi </label><br />
+            <input
+              formControlName="name"
+              type="text"
+              class="form-control-sm"
+              id="name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Ainesosan määrä </label><br />
+            <input
+              formControlName="quantity"
+              type="text"
+              class="form-control-sm"
+              id="quantity"
+            />
+          </div>
+          <button class="btn btn-primary" (click)="deleteSupply(i)">
+            Poista
+          </button>
+        </div>
       </div>
-      <!-- <app-supplies-form
-        *ngFor="let childForm of suppliesArray.controls; let i = index"
-        [childForm]="childForm"
-        [arrayIndex]="i"
-        [totalSupplies]="suppliesArray.length"
-        (deleteSupplyEvent)="deleteSupply($event)"
-      >
-      </app-supplies-form> -->
-    </div>
-    <!--Lisää ainesosa buttoni-->
-    <div class="form-group">
-      <button
-        [disabled]="!suppliesArray.valid"
-        class="btn btn-primary"
-        type="submit"
-        (click)="addRecipeSupplyItem()"
-      >
-        Lisää ainesosa
-      </button>
-    </div>
+      <!--Lisää ainesosa buttoni-->
+      <div class="form-group">
+        <button
+          [disabled]="!suppliesArray.valid"
+          class="btn btn-primary"
+          type="submit"
+          (click)="addRecipeSupplyItems()"
+        >
+          Lisää ainesosa
+        </button>
+      </div>
+    </form>
 
     <div class="form-group col-sm-4">
       <label for="recipeRecipe">Reseptin ohje</label>
@@ -109,8 +124,6 @@
       >
     </div>
     <!--Buttoni jolla lomake lähetetään-->
-    <button class="btn btn-primary" type="submit" [disabled]="!myForm.valid">
-      Lähetä
-    </button>
+    <button class="btn btn-primary" type="submit">Lähetä</button>
   </form>
 </div>

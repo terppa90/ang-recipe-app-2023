@@ -20,7 +20,7 @@ export class NavbarComponent implements OnDestroy {
        varmistus tehdään katsomalla onko token sessionstoragessa.
        Yllä oleva observablen tilaus silti tarvitaan, sillä sessionstoragen
        tarkistus vaatii aina reffauksen koska sitä ei voi kutsua asynkronisesti. */
-    const atoken = sessionStorage.getItem('accesstoken');
+    const atoken = sessionStorage.getItem('token');
     if (atoken) {
       this.login = true;
     } else {

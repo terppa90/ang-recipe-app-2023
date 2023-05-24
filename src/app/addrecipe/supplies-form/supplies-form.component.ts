@@ -1,9 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import {
-  UntypedFormControl,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-supplies-form',
@@ -12,7 +8,7 @@ import {
 })
 export class SuppliesFormComponent {
   @Input()
-  public childForm: UntypedFormGroup;
+  public childForm!: FormGroup;
   // Taulukon index
   @Input()
   public arrayIndex: number;
@@ -23,20 +19,20 @@ export class SuppliesFormComponent {
   @Output()
   public deleteSupplyEvent: EventEmitter<number> = new EventEmitter<number>();
   // Käytetään get:iä että saadaan selkeämpää koodia templaattiin
-  get nameField(): UntypedFormControl {
-    return this.childForm?.get('name') as UntypedFormControl;
+  get nameField(): FormControl {
+    return this.childForm?.get('name') as FormControl;
   }
 
-  get quantityField(): UntypedFormControl {
-    return this.childForm?.get('quantity') as UntypedFormControl;
+  get quantityField(): FormControl {
+    return this.childForm?.get('quantity') as FormControl;
   }
 
   constructor() {}
   // Reseptin ainesosan lisäysmetodi
-  static addRecipeSupplyItem(): UntypedFormGroup {
-    return new UntypedFormGroup({
-      name: new UntypedFormControl('', Validators.required),
-      quantity: new UntypedFormControl('', Validators.required),
+  static addRecipeSupplyItem(): FormGroup {
+    return new FormGroup({
+      name: new FormControl('', Validators.required),
+      quantity: new FormControl('', Validators.required),
     });
   }
   // Reseptin ainesosan poistometodi
