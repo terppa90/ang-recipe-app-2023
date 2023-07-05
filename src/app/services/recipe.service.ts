@@ -41,6 +41,12 @@ export class RecipeService {
     return this.http.delete<Recipe>(url).pipe(catchError(this.handleErr));
   }
 
+  // Muokataan reseptiä
+  editRecipe(id: number): Observable<Recipe> {
+    const url = `${this.recipesUrl}/${id}`;
+    return this.http.get<Recipe>(url);
+  }
+
   // yksinkertaisempi virheenkäsittely
   private handleErr(error: any): Observable<any> {
     console.error('Tapahtui virhe: ', error);

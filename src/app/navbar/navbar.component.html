@@ -31,13 +31,16 @@
 
 <nav class="nav nav-pills nav-fill bg-primary">
   <a class="nav-item nav-link" routerLink="/dashboard">Etusivu</a>
-  <a class="nav-item nav-link" routerLink="/register">Rekisteröidy</a>
+  <a *ngIf="!login" class="nav-item nav-link" routerLink="/register"
+    >Rekisteröidy</a
+  >
   <a *ngIf="!login" class="nav-item nav-link" routerLink="/login">Kirjaudu</a>
+
   <a
     *ngIf="login"
     class="nav-item nav-link"
     routerLink="/login"
     (click)="doLogout()"
-    >Logout</a
-  >
+    >Logout
+  </a>
 </nav>

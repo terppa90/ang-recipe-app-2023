@@ -24,4 +24,12 @@ export class FormService {
     userData.token = mytoken.token;
     return this.http.post<any>(this._url, userData, this.httpOptions);
   }
+  // Update
+  FormUpdateRecipe(id, userData): Observable<any> {
+    const mytoken = JSON.parse(sessionStorage.getItem('token'));
+    console.log(mytoken);
+
+    userData.token = mytoken.token;
+    return this.http.put<any>(`${this._url}/${id}`, userData, this.httpOptions);
+  }
 }

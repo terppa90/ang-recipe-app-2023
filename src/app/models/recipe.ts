@@ -9,8 +9,8 @@ export interface Recipe {
   author: string;
   supplies: [
     {
-      name: String;
-      quantity: String;
+      name: string;
+      quantity: string;
     }
   ];
   recipe: string;

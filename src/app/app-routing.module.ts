@@ -17,9 +17,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'edit',
+    path: 'edit/:id',
     component: EditrecipeComponent,
-    canActivate: [AuthGuard],
   },
   { path: 'recipes', component: RecipesComponent, canActivate: [AuthGuard] }, // reitti komponenttiin joka näyttää kaikki reseptit
   {

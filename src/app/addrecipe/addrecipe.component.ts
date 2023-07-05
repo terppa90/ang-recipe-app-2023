@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormService } from '../form.service';
+import { Location } from '@angular/common';
+import { Recipe } from '../models/recipe';
 
 import {
   FormBuilder,
@@ -17,6 +19,8 @@ import {
   styleUrls: ['./addrecipe.component.css'],
 })
 export class AddrecipeComponent implements OnInit {
+  @Input() recipe!: Recipe;
+  recipes: Recipe[] = [];
   public myForm!: FormGroup;
   arrayIndex: number;
 
@@ -28,7 +32,8 @@ export class AddrecipeComponent implements OnInit {
     private fb: FormBuilder,
     private formService: FormService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
 
   // Käytetään get:iä että saadaan templaattiin selkeempää koodia
@@ -79,6 +84,10 @@ export class AddrecipeComponent implements OnInit {
     });
   }
 
+  goBack() {
+    this.location.back();
+  }
+
   public submitRecipeForm(): void {
     console.log(this.myForm.value);
     this.addRecipeSupplyItems();
@@ -88,16 +97,4 @@ export class AddrecipeComponent implements OnInit {
     });
     this.router.navigate(['/recipes']);
   }
-
-  // Lomakkeen lähetysmetodi
-  // public submitRecipeForm(): void {
-  //   console.log(this.myForm.value);
-  //   this.addRecipeSupplyItem();
-  //   this.formService.FormAddRecipe(this.myForm.value).subscribe(
-  //     (response) => {
-  //       console.log('success', response), this.router.navigate(['/recipes']);
-  //     },
-  //     (error) => console.error('Error', error)
-  //   );
-  // }
 }
