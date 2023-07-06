@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class FormService {
-  _url = 'http://localhost:3000/recipes';
+  _url = 'https://ang-recipe-app-2023-api-terppa90.onrender.com/recipes';
+  // _url = 'http://localhost:3000/recipes';
 
   httpOptions = {
     headers: new HttpHeaders({

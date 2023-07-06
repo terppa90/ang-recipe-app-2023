@@ -9,7 +9,9 @@ import { catchError, tap } from 'rxjs/operators';
 })
 export class RecipeService {
   // oikean palvelimen osoite
-  private recipesUrl = 'http://localhost:3000/recipes';
+  // private recipesUrl = 'http://localhost:3000/recipes';
+  private recipesUrl =
+    'https://ang-recipe-app-2023-api-terppa90.onrender.com/recipes';
   // http-asetukset
   httpOptions = {
     headers: new HttpHeaders({

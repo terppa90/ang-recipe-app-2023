@@ -10,8 +10,12 @@ import { map } from 'rxjs/operators';
 })
 @Injectable()
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/users/login'; // autentikaatiopalvelun osoite
-  private apiUrlReg = 'http://localhost:3000/users/register'; // url rekisteröintiin
+  // private apiUrl = 'http://localhost:3000/users/login'; // autentikaatiopalvelun osoite
+  private apiUrl =
+    'https://ang-recipe-app-2023-api-terppa90.onrender.com/users/login'; // autentikaatiopalvelun osoite
+  private apiUrlReg =
+    'https://ang-recipe-app-2023-api-terppa90.onrender.com/users/register'; // url rekisteröintiin
+  // private apiUrlReg = 'http://localhost:3000/users/register'; // url rekisteröintiin
   public token: string;
   private jwtHelp = new JwtHelperService(); // helpperipalvelu jolla dekoodataan token
   private subject = new Subject<any>(); // subjectilla viesti navbariin että token on tullut
